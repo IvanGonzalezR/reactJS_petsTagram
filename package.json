@@ -13,7 +13,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "webpack": "webpack --mode development",
+    "webpack": "webpack --mode production",
     "dev": "webpack-dev-server --mode development",
     "vercel-build": "npm run build"
   },
