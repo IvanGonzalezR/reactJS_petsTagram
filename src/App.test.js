@@ -1,8 +1,15 @@
-import { render, screen } from '@testing-library/react';
+import { render, getByTestId } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('@Components/App', () => {
+  test('should render successfully', () => {
+    //arrange
+    const { baseElement } = render(<div data-testid='media-img'><App /></div>);
+    //act
+    const app = getByTestId(baseElement, 'media-img');
+    //assert
+    expect(app).toBeDefined();
+    expect(app).toHaveTextContent('Hello World');
+  });
 });
+
