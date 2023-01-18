@@ -1,10 +1,11 @@
 import React from 'react';
+import { ListOfCategories } from './components/ListOfCategories';
 
 function App() {
   return (
-    <h1 className="App">
-      Hello Worldd
-    </h1>
+    <>
+      <ListOfCategories />
+    </>
   );
 }
 
