@@ -27,15 +27,13 @@ const avatarStyle = {
 const Category = ({
   cover = DEFAULT_IMAGE,
   path = '#',
-  emoji = '?'
+  emoji = '🐶'
 }) => {
   return (
-    // <Container maxWidth='xs'>
     <Link href={path} sx={linkStyle}>
       <Avatar src={cover} sx={avatarStyle} />
       {emoji && emoji}
     </Link>
-    // </Container>
   )
 }
 
