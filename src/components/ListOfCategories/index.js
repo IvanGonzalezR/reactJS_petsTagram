@@ -5,7 +5,7 @@ import db from '../../api/db.json'
 
 const listStyle = {
   display: 'flex',
-  overflowX: 'scroll',
+  overflow: 'scroll',
   width: 'auto',
   '&::-webkit-scrollbar': {
     display: 'none'

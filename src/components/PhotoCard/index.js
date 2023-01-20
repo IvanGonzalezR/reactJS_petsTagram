@@ -1,6 +1,8 @@
-import { Avatar, Container, Link } from '@mui/material';
+import { Avatar, Container, Link, Stack, Typography } from '@mui/material';
 import ButtonBase from '@mui/material/ButtonBase';
 import { Box, padding } from '@mui/system'
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import React from 'react'
 
 const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60';
@@ -22,8 +24,19 @@ const containerStyle = {
     width: '100%',
   },
 };
+const stackStyle = {
+  display: 'flex',
+  alignItems: 'left',
+  padding: '0 8px',
+
+};
 const buttonStyle = {
-  paddingTop: '8px',
+  paddingTop: '5px',
+  justifyContent: 'left',
+  width: 'fit-content',
+};
+const favoriteImageStyle = {
+  fontSize: '1.9em',
 };
 
 const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMAGE }) => {
@@ -35,9 +48,14 @@ const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMAGE }) => {
           {/* <Avatar src={src} variant='square' /> */}
         </Container>
       </Link>
-      <ButtonBase size='small' sx={buttonStyle}>
-        {likes} Likes!
-      </ButtonBase>
+      <Stack sx={stackStyle}>
+        <ButtonBase size='small' sx={buttonStyle}>
+          <FavoriteBorderIcon sx={favoriteImageStyle} />
+        </ButtonBase>
+        <Typography variant='body2'>
+          {likes} Likes
+        </Typography>
+      </Stack>
     </Box>
   )
 }
