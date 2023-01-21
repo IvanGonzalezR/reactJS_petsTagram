@@ -31,7 +31,7 @@ const Category = ({
 }) => {
   return (
     <Link href={path} sx={linkStyle}>
-      <Avatar src={cover} sx={avatarStyle} />
+      <Avatar src={cover} sx={avatarStyle} alt="imagen" />
       {emoji && emoji}
     </Link>
   )

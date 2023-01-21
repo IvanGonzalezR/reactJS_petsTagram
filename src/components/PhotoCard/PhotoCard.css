@@ -1,0 +1,15 @@
+
+@keyframes yourAnimation{
+    0% {
+        filter: blur(5px);
+        opacity: 0;
+    }
+    100% {
+        filter: blur(0px);
+        opacity: 1;
+    }
+}
+
+#image{
+    animation: yourAnimation 2.5s ease-out normal none;
+}

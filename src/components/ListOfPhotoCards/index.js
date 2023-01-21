@@ -12,7 +12,7 @@ const ListOfPhotoCards = () => {
   return (
     <List sx={listStyle}>
       {[ 1, 2, 3, 4, 5, 6, 7, 8, 9 ].map(photoCard => (
-        <PhotoCard key={photoCard} />
+        <PhotoCard key={photoCard} alt="Imagenes" />
       ))}
     </List>
   )

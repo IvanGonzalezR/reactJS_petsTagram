@@ -1,14 +1,13 @@
 import React from 'react';
 import { ListOfCategories } from './components/ListOfCategories';
-import { GlobalStyless } from './GlobalStyles';
 // import { ListOfPhotoCards } from './components/ListOfPhotoCards';
-import { PhotoCard } from './components/PhotoCard';
+import { Logo } from './components/Logo';
 import { ListOfPhotoCards } from './components/ListOfPhotoCards';
 
 function App() {
   return (
     <>
-      {/* <GlobalStyless /> */}
+      <Logo />
       <ListOfCategories />
       <ListOfPhotoCards />
     </>

@@ -4,6 +4,7 @@ import { Box, padding } from '@mui/system'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import React from 'react'
+import './PhotoCard.css'
 
 const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60';
 const containerStyle = {
@@ -43,8 +44,8 @@ const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMAGE }) => {
   return (
     <Box component='article'>
       <Link href={`/detail/${id}`}>
-        <Container sx={containerStyle}>
-          <img src={src} alt='' />
+        <Container sx={containerStyle} id='image'>
+          <img src={src} />
           {/* <Avatar src={src} variant='square' /> */}
         </Container>
       </Link>
