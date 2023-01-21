@@ -30,6 +30,7 @@ const ListOfCategories = () => {
     }
     fetchCategories();
   }, []);
+
   return (
     <List sx={listStyle} disablePadding={true}>
       {
