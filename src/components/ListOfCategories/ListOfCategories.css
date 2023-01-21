@@ -1,0 +1,13 @@
+@keyframes yourAnimation{
+  from {
+    top: -98px;
+  }
+  to {
+    top: 0px;
+  }
+}
+
+#listOfCategories{
+  animation: yourAnimation 0.4s linear normal none;
+}
+
