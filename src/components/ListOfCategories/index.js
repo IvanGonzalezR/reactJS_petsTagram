@@ -10,34 +10,33 @@ const listStyle = {
   '&::-webkit-scrollbar': {
     display: 'none'
   },
-  '&.fixed': {
-    position: 'fixed',
-    top: '0px',
-    width: '100%',
-    backgroundColor: '#fefefe',
-    borderRadius: '0 0 5px 5px',
-    boxShadow: '0px 14px 29px -26px rgba(10, 10, 10, 0.74)',
-    zIndex: '1',
-    padding: '5px',
-    maxWidth: '500px',
-  },
 };
 const listItemStyle = {
   padding: '0 0.5rem',
+  // '-webkit-tap-highlight-color': 'transparent',
 };
 
-const ListOfCategories = () => {
+function useCategoriesData() {
   const [ categories, setCategories ] = React.useState([]);
-  const [ showFixed, setShowFixed ] = React.useState(false);
+  const [ loading, setLoading ] = React.useState(false);
 
   React.useEffect(() => {
+    setLoading(true);
     const fetchCategories = async () => {
       const response = await fetch('https://petgram-server-24iykciv5.now.sh/categories');
       const data = await response.json();
       setCategories(data);
+      setLoading(false);
     }
     fetchCategories();
   }, []);
+
+  return { categories, loading };
+}
+
+const ListOfCategories = () => {
+  const { categories, loading } = useCategoriesData();
+  const [ showFixed, setShowFixed ] = React.useState(false);
 
   React.useEffect(() => {
     const onScroll = (e) => {
@@ -52,13 +51,12 @@ const ListOfCategories = () => {
 
   const renderList = (fixed, isCopy) => (
     <List
-      className={(fixed ? 'fixed' : '')}
+      fixed={(fixed ? true : false)}
       sx={listStyle}
-      disablePadding={true}
       id={isCopy ? 'listOfCategories' : ''}
     >
       {
-        categories.length > 0 && (
+        !loading && (
           categories.map(category =>
             <ListItem
               key={category.id}
