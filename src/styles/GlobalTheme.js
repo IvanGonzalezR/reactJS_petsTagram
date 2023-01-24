@@ -16,7 +16,7 @@ const theme = createTheme({
       },
       variants: [
         {
-          props: { fixed: true },
+          props: { fixed: 'true' },
           style: {
             position: 'fixed',
             top: '0px',

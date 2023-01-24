@@ -9,10 +9,15 @@ const listStyle = {
   },
 };
 const ListOfPhotoCards = () => {
+  const array = [ 1, 2, 3, 4, 5, 6, 7, 8 ];
   return (
     <List sx={listStyle}>
-      {[ 1, 2, 3, 4, 5, 6, 7, 8, 9 ].map(photoCard => (
-        <PhotoCard key={photoCard} alt="Imagenes" />
+      {array.map(id => (
+        <PhotoCard
+          key={id}
+          id={id}
+          alt="Imagenes"
+        />
       ))}
     </List>
   )

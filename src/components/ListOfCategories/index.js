@@ -1,7 +1,7 @@
 import { List, ListItem, Typography } from '@mui/material';
 import React from 'react'
 import { Category } from '../Category'
-import './ListOfCategories.css'
+import '../../styles/ListOfCategories.css'
 
 const listStyle = {
   display: 'flex',
@@ -51,7 +51,7 @@ const ListOfCategories = () => {
 
   const renderList = (fixed, isCopy) => (
     <List
-      fixed={(fixed ? true : false)}
+      fixed={(fixed ? 'true' : undefined)}
       sx={listStyle}
       id={isCopy ? 'listOfCategories' : ''}
     >
