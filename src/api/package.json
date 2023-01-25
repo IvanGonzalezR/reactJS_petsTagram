@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "deploy": "now -t JC8AYpPZN66P2BNdPc5VwH3T",
+    "deploy": "vercel -t JC8AYpPZN66P2BNdPc5VwH3T",
     "start": "NODE_ENV=production node index.js",
     "dev": "nodemon index.js --ignore db.json",
     "test": "echo \"Error: no test specified\" && exit 1"
