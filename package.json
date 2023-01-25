@@ -4,11 +4,13 @@
   "private": true,
   "mode": "development",
   "dependencies": {
+    "@apollo/client": "^3.7.5",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.5",
     "axios": "^1.2.3",
+    "graphql": "^16.6.0",
     "intersection-observer": "^0.12.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
