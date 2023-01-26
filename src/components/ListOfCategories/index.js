@@ -2,18 +2,34 @@ import { List, ListItem, Typography } from '@mui/material';
 import React from 'react'
 import { Category } from '../Category'
 import '../../styles/ListOfCategories.css'
+import Skeleton from '@mui/material/Skeleton';
+import { Stack } from '@mui/system';
 
 const listStyle = {
   display: 'flex',
   overflow: 'scroll',
   width: 'auto',
+  marginBottom: '0.4rem',
   '&::-webkit-scrollbar': {
     display: 'none'
   },
 };
 const listItemStyle = {
   padding: '0 0.5rem',
-  // '-webkit-tap-highlight-color': 'transparent',
+};
+const stackSkeletonStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginRight: '1rem',
+  '&:first-of-type': {
+    marginLeft: '0.7rem',
+  },
+};
+const skeletonStyle = {
+  width: '18vw',
+  height: '18vw',
 };
 
 function useCategoriesData() {
@@ -69,7 +85,18 @@ const ListOfCategories = () => {
             </ListItem>
           ))
         ||
-        <Typography variant='body1'>Loading...</Typography>
+        (
+          [ 1, 2, 3, 4, 5, 6, 7, 8 ].map(id => (
+            <Stack sx={stackSkeletonStyle}>
+              <Skeleton
+                variant="circular"
+                sx={skeletonStyle}>
+                <Category />
+              </Skeleton>
+              <Skeleton variant='text' width='1.5rem' height='1.5rem' />
+            </Stack>
+          ))
+        )
       }
     </List>
   );
