@@ -1,7 +1,8 @@
 import { List } from '@mui/material';
 import React from 'react'
 import { PhotoCard } from '../PhotoCard';
-import { useQuery, gql } from '@apollo/client';
+// import { useGetPhotos } from '../../hooks/queries/useGetPhotos'
+import { ListOfPhotoCardsComponent } from '../../containers/ListOfPhotoCards';
 import Skeleton from '@mui/material/Skeleton';
 
 const listStyle = {
@@ -11,23 +12,8 @@ const listStyle = {
   },
 };
 
-const withPhotos = gql`
-    query getPhotos{
-      photos{
-        id
-        categoryId
-        src
-        likes
-        userId
-        liked
-      }
-    }
-`;
-
 const ListOfPhotoCards = () => {
-
-  const { loading, error, data } = useQuery(withPhotos);
-  console.log(data);
+  const { loading, data, error } = ListOfPhotoCardsComponent(2);
 
   const array = [ 1, 2, 3, 4, 5, 6, 7, 8 ];
   return (

@@ -37,7 +37,7 @@ const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMAGE }) => {
       {
         show && (
           <>
-            <Link href={`/detail/${id}`}>
+            <Link href={`/?detail=${id}`}>
               <Container sx={containerStyle} id='image'>
                 <img src={src} />
               </Container>

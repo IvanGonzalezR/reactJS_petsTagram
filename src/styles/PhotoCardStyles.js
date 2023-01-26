@@ -4,7 +4,6 @@ const articleStyle = {
 const containerStyle = {
   overflow: 'hidden',
   padding: '0 !important',
-  borderRadius: '10px',
   display: 'block',
   padding: '56.25% 0 0 0 !important',
   position: 'relative',
@@ -23,7 +22,6 @@ const stackStyle = {
   display: 'flex',
   alignItems: 'left',
   padding: '0 8px',
-
 };
 const buttonStyle = {
   paddingTop: '5px',
