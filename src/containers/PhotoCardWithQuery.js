@@ -4,7 +4,7 @@ import { gql, useQuery } from "@apollo/client";
 import { Skeleton } from "@mui/material";
 import { Query } from "@apollo/client/react/components";
 
-const query = gql`
+const GET_SINGLE_PHOTO = gql`
   query getSinglePhoto($id: ID!) {
     photo(id: $id) {
       id
@@ -19,7 +19,7 @@ const query = gql`
 
 const PhotoCardWithQuery = ({ id }) => {
   const { loading, error, data } = useQuery(
-    query,
+    GET_SINGLE_PHOTO,
     {
       variables: { id: id },
     }

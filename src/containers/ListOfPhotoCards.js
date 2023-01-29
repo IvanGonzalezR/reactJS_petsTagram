@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/client";
-import { withPhotos } from "../hooks/queries/useGetPhotos";
+import { GET_PHOTOS } from "../hooks/queries/useGetPhotos";
 
 export function ListOfPhotoCardsComponent(categoryId) {
   const { loading, error, data } = useQuery(
-    withPhotos,
+    GET_PHOTOS,
     {
       variables: {
         categoryId: categoryId
