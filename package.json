@@ -19,12 +19,12 @@
     "react-transition-group": "^4.4.5"
   },
   "scripts": {
-    "start": "react-scripts start --history-api-fallback",
+    "start": "react-scripts start ",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "webpack": "webpack --mode production",
-    "dev": "webpack-dev-server --mode development --history-api-fallback",
+    "dev": "webpack-dev-server --mode development",
     "vercel-build": "npm run build"
   },
   "eslintConfig": {
