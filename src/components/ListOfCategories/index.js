@@ -81,6 +81,7 @@ const ListOfCategories = () => {
             >
               <Category
                 {...category}
+                path={`/pet/${category.id}`}
               />
             </ListItem>
           ))

@@ -11,8 +11,8 @@ const listStyle = {
   },
 };
 
-const ListOfPhotoCards = () => {
-  const { loading, data, error } = ListOfPhotoCardsComponent(2);
+const ListOfPhotoCards = ({ categoryId }) => {
+  const { loading, data, error } = ListOfPhotoCardsComponent(categoryId);
 
   const array = [ 1, 2, 3, 4, 5, 6, 7, 8 ];
   if (loading) {

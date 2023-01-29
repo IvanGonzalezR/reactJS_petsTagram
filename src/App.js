@@ -1,11 +1,10 @@
 import React from 'react';
-import { ListOfCategories } from './components/ListOfCategories';
-// import { ListOfPhotoCards } from './components/ListOfPhotoCards';
 import { Logo } from './components/Logo';
-import { ListOfPhotoCards } from './components/ListOfPhotoCards';
+import { HomePage } from './pages/HomePage';
 import { ThemeProvider } from '@mui/material';
 import { theme } from './styles/GlobalTheme';
 import { PhotoCardWithQuery } from './containers/PhotoCardWithQuery';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
 
@@ -15,16 +14,21 @@ function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Logo />
-        {
-          detailId ?
-            <PhotoCardWithQuery id={detailId} />
-            :
-            <>
-              <ListOfCategories />
-              <ListOfPhotoCards />
-            </>
-        }
+        <BrowserRouter>
+          <Logo />
+          {
+            detailId ?
+              <PhotoCardWithQuery id={detailId} />
+              :
+              (
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/pet/:id" element={<HomePage />} />
+                  <Route path="*" element={<h1>404 Not Found!</h1>} />
+                </Routes>
+              )
+          }
+        </BrowserRouter>
       </ThemeProvider>
     </>
   );

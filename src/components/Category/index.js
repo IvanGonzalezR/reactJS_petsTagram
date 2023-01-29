@@ -1,15 +1,20 @@
-import { Avatar, Container, Link } from '@mui/material';
-import { Stack } from '@mui/system';
+import { Avatar, Box, Typography } from '@mui/material';
+import { Link } from 'react-router-dom'
 import React from 'react'
+import { Container } from '@mui/system';
 
 const DEFAULT_IMAGE = 'https://imgur.com/dJa0Hpl.jpg'
 
 const linkStyle = {
   width: 'fit-content',
-  textDecoration: 'none',
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'center',
+  padding: '0 !important',
+};
+const textStyle = {
+  alignSelf: 'center',
+  display: 'flex',
+  justifyContent: 'center',
 };
 const avatarStyle = {
   width: '18vw',
@@ -30,10 +35,14 @@ const Category = ({
   emoji = '🐶'
 }) => {
   return (
-    <Link href={path} sx={linkStyle}>
-      <Avatar src={cover} sx={avatarStyle} alt="imagen" />
-      {emoji && emoji}
-    </Link>
+    <Container sx={linkStyle}>
+      <Link to={path}>
+        <Avatar src={cover} sx={avatarStyle} alt="imagen" />
+        <Typography sx={textStyle}>
+          {emoji && emoji}
+        </Typography>
+      </Link>
+    </Container>
   )
 }
 
