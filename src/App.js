@@ -17,16 +17,19 @@ function App() {
         <BrowserRouter>
           <Logo />
           {
-            detailId ?
-              <PhotoCardWithQuery id={detailId} />
-              :
-              (
-                <Routes>
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/pet/:id" element={<HomePage />} />
-                  <Route path="*" element={<h1>404 Not Found!</h1>} />
-                </Routes>
-              )
+            // detailId
+            //   ? <Routes>
+            //     <Route path="/" element={<PhotoCardWithQuery id={detailId} />} />
+            //   </Routes>
+            //   :
+            (
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/pet/:petId" element={<HomePage />} />
+                <Route path="/detail/:detailId" element={<PhotoCardWithQuery />} />
+                <Route path="*" element={<h1>404 Not Found!</h1>} />
+              </Routes>
+            )
           }
         </BrowserRouter>
       </ThemeProvider>

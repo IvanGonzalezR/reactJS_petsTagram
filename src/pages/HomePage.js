@@ -8,7 +8,7 @@ export const HomePage = () => {
   return (
     <>
       <ListOfCategories />
-      <ListOfPhotoCards categoryId={params.id} />
+      <ListOfPhotoCards categoryId={params.petId} />
     </>
   )
 }

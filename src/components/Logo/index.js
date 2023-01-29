@@ -14,7 +14,7 @@ const svgStyle = {
   backgroundColor: 'white',
 };
 const Logo = (props) => (
-  <Link to="/">
+  <Link to="/" title="Logo">
     <SvgIcon
       sx={svgStyle}
       inheritViewBox={true} // this is the key

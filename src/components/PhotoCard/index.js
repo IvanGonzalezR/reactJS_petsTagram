@@ -1,4 +1,4 @@
-import { Container, Link, } from '@mui/material';
+import { Container } from '@mui/material';
 import { Box } from '@mui/system'
 import React from 'react'
 import '../../styles/PhotoCard.css'
@@ -10,6 +10,7 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useNearScreen } from '../../hooks/useNearScreen';
 import { FavButton } from '../FavButton';
 import { useMutationToggleLike } from '../../hooks/useMutationToggleLike';
+import { Link } from 'react-router-dom';
 
 const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60';
 
@@ -36,7 +37,7 @@ const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMAGE }) => {
       {
         show && (
           <>
-            <Link href={`/?detail=${id}`}>
+            <Link to={`/detail/${id}`}>
               <Container sx={containerStyle} id='image'>
                 <img src={src} />
               </Container>

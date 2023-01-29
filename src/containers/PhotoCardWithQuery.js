@@ -2,7 +2,7 @@ import React from "react";
 import { PhotoCard } from "../components/PhotoCard";
 import { gql, useQuery } from "@apollo/client";
 import { Skeleton } from "@mui/material";
-import { Query } from "@apollo/client/react/components";
+import { useParams } from "react-router-dom";
 
 const GET_SINGLE_PHOTO = gql`
   query getSinglePhoto($id: ID!) {
@@ -17,7 +17,9 @@ const GET_SINGLE_PHOTO = gql`
   }
 `;
 
-const PhotoCardWithQuery = ({ id }) => {
+const PhotoCardWithQuery = () => {
+  const params = useParams();
+  const id = params.detailId;
   const { loading, error, data } = useQuery(
     GET_SINGLE_PHOTO,
     {
