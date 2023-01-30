@@ -35,7 +35,7 @@ const FavButton = ({ liked, likes, onClick }) => {
         </Grow>
       </ButtonBase>
       <Typography variant='body2'>
-        {likes} Likess
+        {likes} Likes
       </Typography>
     </Stack>
   );

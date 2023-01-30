@@ -5,18 +5,6 @@ import '../../styles/ListOfCategories.css'
 import Skeleton from '@mui/material/Skeleton';
 import { Stack } from '@mui/system';
 
-const listStyle = {
-  display: 'flex',
-  overflow: 'scroll',
-  width: 'auto',
-  marginBottom: '0.4rem',
-  '&::-webkit-scrollbar': {
-    display: 'none'
-  },
-};
-const listItemStyle = {
-  padding: '0 0.5rem',
-};
 const stackSkeletonStyle = {
   display: 'flex',
   flexDirection: 'column',
@@ -54,6 +42,22 @@ const ListOfCategories = () => {
   const { categories, loading } = useCategoriesData();
   const [ showFixed, setShowFixed ] = React.useState(false);
 
+  const listStyle = {
+    display: 'flex',
+    overflow: 'scroll',
+    width: '100%',
+    height: showFixed ? '88px' : '95px',
+    marginBottom: '0.4rem',
+    '&::-webkit-scrollbar': {
+      display: 'none'
+    },
+  };
+  const listItemStyle = {
+    padding: '0 0.5rem',
+    height: showFixed ? '80px' : '95px',
+    transform: showFixed ? 'scale(0.85)' : 'scale(0.97)',
+  };
+
   React.useEffect(() => {
     const onScroll = (e) => {
       const newShowFixed = window.scrollY > 130;
@@ -87,7 +91,7 @@ const ListOfCategories = () => {
           ))
         ||
         (
-          [ 1, 2, 3, 4, 5, 6, 7, 8 ].map(id => (
+          [ 1, 2, 3, 4, 5, 6 ].map(id => (
             <Stack sx={stackSkeletonStyle}>
               <Skeleton
                 variant="circular"
