@@ -21,10 +21,10 @@ const NavBar = () => {
   };
 
   const paperStyles = {
+    width: '100%',
+    maxWidth: '500px',
     position: 'fixed',
     bottom: 0,
-    left: 0,
-    right: 0,
     zIndex: 1000,
     borderTop: '1px solid #e0e0e0',
     backgroundColor: '#fff',
