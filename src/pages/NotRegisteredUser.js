@@ -21,6 +21,10 @@ const NotRegisteredUser = () => {
       objectFit: 'cover',
     }
   };
+  const cardMediaStyles = {
+    filter: 'blur(3px)',
+  }
+
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
@@ -30,7 +34,11 @@ const NotRegisteredUser = () => {
   return (
     <>
       <Box sx={boxStyles}>
-        <CardMedia component='img' image='https://i.imgur.com/dPh3NDK.jpg' alt='logo' />
+        <CardMedia
+          component='img'
+          image='https://i.imgur.com/dPh3NDK.jpg'
+          sx={cardMediaStyles}
+          alt='logo' />
       </Box>
       <UserForm onSubmit={handleSubmit} title='Login'></UserForm>
       {/* <UserForm onSubmit={handleSubmit} title='Registrarse'></UserForm> */}

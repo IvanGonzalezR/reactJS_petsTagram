@@ -19,7 +19,6 @@ const NavBar = () => {
     width: '100%',
     height: '48px',
   };
-
   const paperStyles = {
     width: '100%',
     maxWidth: '500px',
@@ -29,6 +28,9 @@ const NavBar = () => {
     borderTop: '1px solid #e0e0e0',
     backgroundColor: '#fff',
   };
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }
 
   return (
     <Paper sx={paperStyles} elevation={3}>
@@ -40,6 +42,7 @@ const NavBar = () => {
         <BottomNavigationAction
           label="Home"
           value="home"
+          onClick={handleScrollToTop}
           icon={<HomeIcon />}
         />
         <BottomNavigationAction
