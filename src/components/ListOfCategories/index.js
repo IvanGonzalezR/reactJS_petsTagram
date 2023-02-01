@@ -92,7 +92,7 @@ const ListOfCategories = () => {
         ||
         (
           [ 1, 2, 3, 4, 5, 6 ].map(id => (
-            <Stack sx={stackSkeletonStyle}>
+            <Stack sx={stackSkeletonStyle} key={id}>
               <Skeleton
                 variant="circular"
                 sx={skeletonStyle}>

@@ -9,17 +9,18 @@ import { Detail } from './pages/Detail';
 import { User } from './pages/User';
 import { Favs } from './pages/Favs';
 import { NotRegisteredUser } from './pages/NotRegisteredUser';
+import { shallowEqual, useSelector } from 'react-redux';
 
 
-const isAuth = false;
 
 function App() {
+  const isAuth = useSelector((state) => state.isAuth, shallowEqual);
+
   return (
     <>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Logo />
-
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/pet/:petId" element={<HomePage />} />
