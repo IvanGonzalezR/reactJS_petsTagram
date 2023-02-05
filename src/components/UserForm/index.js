@@ -5,7 +5,15 @@ import { Stack } from '@mui/system';
 import logo from '../../img/petgram.png';
 import LockIcon from '@mui/icons-material/Lock';
 
-const UserForm = ({ signUp, setSignUp, onSubmit, error, loading }) => {
+const UserForm = (
+  { signUp,
+    setSignUp,
+    onRegister,
+    onLogin,
+    loginError,
+    loginLoading,
+    registerError,
+    registerLoading }) => {
 
   const [ confirmPassword, setConfirmPassword ] = React.useState('');
   const [ passDoNotMatch, setPassDoNotMatch ] = React.useState(false);
@@ -73,7 +81,6 @@ const UserForm = ({ signUp, setSignUp, onSubmit, error, loading }) => {
     border: '1px solid #ccc',
     borderRadius: '10px',
     padding: '5px',
-    // opacity: loading ? '0.4' : '1',
     '&:hover': {
       border: '1px solid #aba',
     },
@@ -111,7 +118,8 @@ const UserForm = ({ signUp, setSignUp, onSubmit, error, loading }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    signUp && handleSignUp() || handleLogin();
+    signUp ? handleSignUp() : handleLogin();
+    console.log(signUp);
   };
 
   const handleSignUp = () => {
@@ -119,18 +127,26 @@ const UserForm = ({ signUp, setSignUp, onSubmit, error, loading }) => {
       email: email.value,
       password: password.value
     };
-    if (password.value == confirmPassword) {
-      console.log('they match!');
-      onSubmit(input);
-      // setSignUp(!signUp);
-    } else {
+    if (email.value.length <= 0 || password.value.length <= 0
+      || confirmPassword.length <= 0) {
       console.log('Passwords do not match');
       setPassDoNotMatch(true);
+    } else if (password.value == confirmPassword) {
+      console.log('they match!');
+      onRegister(input);
     }
   }
 
   const handleLogin = () => {
-    console.log('handleLogin');
+    const input = {
+      email: email.value,
+      password: password.value
+    };
+    if (email.value.length <= 0 || password.value.length <= 0) {
+      alert('fill the inputs');
+    } else {
+      onLogin(input);
+    }
   }
 
   return (
@@ -143,7 +159,7 @@ const UserForm = ({ signUp, setSignUp, onSubmit, error, loading }) => {
           <Typography color='primary' sx={loginTextStyles}>{signUp ? 'Sign Up' : 'Login'}</Typography>
           <Stack direction='column' sx={inputStackStyles}>
             {
-              error
+              (registerError || loginError)
               && <Typography color='error' variant='body2'>
                 Ups!, ocurrió un error inesperado :(
               </Typography>
@@ -159,7 +175,7 @@ const UserForm = ({ signUp, setSignUp, onSubmit, error, loading }) => {
                 placeholder="Email"
                 autoComplete='Enter'
                 type='email'
-                disabled={loading}
+                disabled={registerLoading || loginLoading}
                 sx={inputStyle}
                 {...email}
               />
@@ -176,7 +192,7 @@ const UserForm = ({ signUp, setSignUp, onSubmit, error, loading }) => {
                 autoComplete='Password'
                 type='password'
                 sx={inputStyle}
-                disabled={loading}
+                disabled={registerLoading || loginLoading}
                 {...password}
                 endAdornment={<LockIcon sx={{ color: '#ccc' }} />}
               />
@@ -196,7 +212,7 @@ const UserForm = ({ signUp, setSignUp, onSubmit, error, loading }) => {
                       placeholder="Confirm password"
                       autoComplete='Password'
                       type='password'
-                      disabled={loading}
+                      disabled={registerLoading || loginLoading}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       value={confirmPassword}
                       sx={inputStyle}
@@ -233,7 +249,7 @@ const UserForm = ({ signUp, setSignUp, onSubmit, error, loading }) => {
           </Stack>
           <ButtonBase
             type='submit'
-            disabled={loading}
+            disabled={registerLoading || loginLoading}
             sx={submitButtonStyles}
             onClick={handleSubmit}
           >{

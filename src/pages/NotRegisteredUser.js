@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { UserForm } from '../components/UserForm';
 import { setIsAuth } from '../slices/basicSlice';
 import { useRegisterMutation } from '../hooks/useRegisterMutation';
+import { useLoginMutation } from '../hooks/useLoginMutation';
 
 
 const NotRegisteredUser = () => {
@@ -27,13 +28,24 @@ const NotRegisteredUser = () => {
   }
 
   const dispatch = useDispatch();
-  const { register, loading, error } = useRegisterMutation();
+  const { register, loading: registerLoading, error: registerError } = useRegisterMutation();
+  const { login, loading: loginLoading, error: loginError } = useLoginMutation();
   const [ signUp, setSignUp ] = React.useState(true);
 
-  const handleSubmit = ({ email, password }) => {
+  const handleRegister = ({ email, password }) => {
     const input = { email, password };
     const variable = { input };
     register({
+      variables: variable
+    }).then(() => {
+      dispatch(setIsAuth(true));
+    });
+  };
+
+  const handleLogin = ({ email, password }) => {
+    const input = { email, password };
+    const variable = { input };
+    login({
       variables: variable
     }).then(() => {
       dispatch(setIsAuth(true));
@@ -50,9 +62,12 @@ const NotRegisteredUser = () => {
           alt='logo' />
       </Box>
       <UserForm
-        onSubmit={handleSubmit}
-        loading={loading}
-        error={error}
+        onRegister={handleRegister}
+        onLogin={handleLogin}
+        registerLoading={registerLoading}
+        registerError={registerError}
+        loginLoading={loginLoading}
+        loginError={loginError}
         signUp={signUp}
         setSignUp={setSignUp}
       />
