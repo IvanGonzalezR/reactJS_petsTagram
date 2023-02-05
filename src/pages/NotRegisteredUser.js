@@ -1,8 +1,9 @@
-import { Box, CardMedia, Container } from '@mui/material';
+import { Box, CardMedia } from '@mui/material';
 import React from 'react'
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { UserForm } from '../components/UserForm';
 import { setIsAuth } from '../slices/basicSlice';
+import { useRegisterMutation } from '../hooks/useRegisterMutation';
 
 
 const NotRegisteredUser = () => {
@@ -26,10 +27,18 @@ const NotRegisteredUser = () => {
   }
 
   const dispatch = useDispatch();
+  const { register, loading, error } = useRegisterMutation();
+  const [ signUp, setSignUp ] = React.useState(true);
 
-  const handleSubmit = () => {
-    dispatch(setIsAuth(true));
-  }
+  const handleSubmit = ({ email, password }) => {
+    const input = { email, password };
+    const variable = { input };
+    register({
+      variables: variable
+    }).then(() => {
+      dispatch(setIsAuth(true));
+    });
+  };
 
   return (
     <>
@@ -40,8 +49,13 @@ const NotRegisteredUser = () => {
           sx={cardMediaStyles}
           alt='logo' />
       </Box>
-      <UserForm onSubmit={handleSubmit} title='Login'></UserForm>
-      {/* <UserForm onSubmit={handleSubmit} title='Registrarse'></UserForm> */}
+      <UserForm
+        onSubmit={handleSubmit}
+        loading={loading}
+        error={error}
+        signUp={signUp}
+        setSignUp={setSignUp}
+      />
     </>
   )
 }

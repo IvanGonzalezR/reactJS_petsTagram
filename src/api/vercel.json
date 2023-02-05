@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "name": "petgram-server-ivang",
-  "alias": ["petgram-api-ivang"],
+  "name": "petgram-server",
+  "alias": ["petgram-api-kikeg"],
   "builds": [{ "src": "index.js", "use": "@vercel/node" }],
   "routes": [{
     "headers": {

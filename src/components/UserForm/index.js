@@ -3,8 +3,13 @@ import { Box, Button, ButtonBase, CardMedia, FormControl, Input, InputBase, Inpu
 import { useInputValue } from '../../hooks/useInputValue';
 import { Stack } from '@mui/system';
 import logo from '../../img/petgram.png';
+import LockIcon from '@mui/icons-material/Lock';
 
-const UserForm = ({ onSubmit, title }) => {
+const UserForm = ({ signUp, setSignUp, onSubmit, error, loading }) => {
+
+  const [ confirmPassword, setConfirmPassword ] = React.useState('');
+  const [ passDoNotMatch, setPassDoNotMatch ] = React.useState(false);
+
   const parentBoxStyles = {
     height: '85vh',
     width: '100%',
@@ -16,7 +21,7 @@ const UserForm = ({ onSubmit, title }) => {
     zIndex: 2,
   };
   const paperStyles = {
-    height: '70vh',
+    height: '75vh',
     width: '70%',
     maxWidth: '300px',
     maxHeight: '500px',
@@ -32,7 +37,6 @@ const UserForm = ({ onSubmit, title }) => {
     height: '100%',
     width: '100%',
     maxWidth: '230px',
-    padding: '16px 0',
     display: 'flex',
     position: 'relative',
     zIndex: 3,
@@ -57,37 +61,93 @@ const UserForm = ({ onSubmit, title }) => {
   const inputStackStyles = {
     width: '100%',
     maxWidth: '300px',
+    height: signUp ? '240px' : '190px',
+    display: 'flex',
+    padding: '0',
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   };
   const inputStyle = {
     border: '1px solid #ccc',
     borderRadius: '10px',
     padding: '5px',
+    // opacity: loading ? '0.4' : '1',
+    '&:hover': {
+      border: '1px solid #aba',
+    },
+    '&:focus': {
+      border: '1px solid #aba',
+    },
+  };
+  const signOptionsStyles = {
+    width: '100%',
+    maxWidth: '300px',
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   };
   const submitButtonStyles = {
     width: '100%',
     maxWidth: '300px',
-    height: '40px',
+    marginTop: '10px',
+    height: '34px',
+    fontSize: '1rem',
     borderRadius: '10px',
     backgroundColor: '#3f51b5',
     color: '#fff',
     '&:hover': {
       backgroundColor: '#3f51b5',
       opacity: '0.8',
+    },
+    '&:disabled': {
+      opacity: '0.3',
     }
   };
 
   const email = useInputValue('');
   const password = useInputValue('');
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    signUp && handleSignUp() || handleLogin();
+  };
+
+  const handleSignUp = () => {
+    const input = {
+      email: email.value,
+      password: password.value
+    };
+    if (password.value == confirmPassword) {
+      console.log('they match!');
+      onSubmit(input);
+      // setSignUp(!signUp);
+    } else {
+      console.log('Passwords do not match');
+      setPassDoNotMatch(true);
+    }
+  }
+
+  const handleLogin = () => {
+    console.log('handleLogin');
+  }
+
   return (
     <Box sx={parentBoxStyles}>
       <Paper elevation={4} sx={paperStyles}>
-        <Box component='form' onSubmit={onSubmit} sx={childBoxStyles}>
+        <Box component='form' sx={childBoxStyles}>
           <Box sx={imageBoxStyles}>
             <CardMedia component='img' image={logo} alt='logo' sx={imageBoxStyles} />
           </Box>
-          <Typography color='primary' sx={loginTextStyles}>{title}</Typography>
-          <Stack direction='column' gap={3} sx={inputStackStyles}>
+          <Typography color='primary' sx={loginTextStyles}>{signUp ? 'Sign Up' : 'Login'}</Typography>
+          <Stack direction='column' sx={inputStackStyles}>
+            {
+              error
+              && <Typography color='error' variant='body2'>
+                Ups!, ocurrió un error inesperado :(
+              </Typography>
+            }
             <FormControl required={true} sx={formControlStyles}>
               {
                 email.lenght > 0
@@ -99,33 +159,91 @@ const UserForm = ({ onSubmit, title }) => {
                 placeholder="Email"
                 autoComplete='Enter'
                 type='email'
+                disabled={loading}
                 sx={inputStyle}
                 {...email}
               />
             </FormControl>
-            <Stack gap={1}>
-              <FormControl required={true} sx={formControlStyles}>
-                {
-                  password.lenght > 0
-                    ? <InputLabel>Password</InputLabel>
-                    : null
-                }
-                <InputBase
-                  id="pass-input"
-                  placeholder="Password"
-                  autoComplete='Password'
-                  type='password'
-                  sx={inputStyle}
-                  {...password}
-                />
-              </FormControl>
-              <Typography variant='caption' color='primary'>Forgot password?</Typography>
-            </Stack>
+            <FormControl required={true} sx={formControlStyles}>
+              {
+                password.lenght > 0
+                  ? <InputLabel>Password</InputLabel>
+                  : null
+              }
+              <InputBase
+                id="pass-input"
+                placeholder="Password"
+                autoComplete='Password'
+                type='password'
+                sx={inputStyle}
+                disabled={loading}
+                {...password}
+                endAdornment={<LockIcon sx={{ color: '#ccc' }} />}
+              />
+            </FormControl>
+
+            {
+              signUp
+                ? (
+                  <FormControl required={true} sx={formControlStyles}>
+                    {
+                      confirmPassword.lenght > 0
+                        ? <InputLabel>Confirm password</InputLabel>
+                        : null
+                    }
+                    <InputBase
+                      id="confirmPass-input"
+                      placeholder="Confirm password"
+                      autoComplete='Password'
+                      type='password'
+                      disabled={loading}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      value={confirmPassword}
+                      sx={inputStyle}
+                      endAdornment={<LockIcon sx={{ color: '#ccc' }} />}
+                    />
+                  </FormControl>
+                )
+                : null
+            }
+            {
+              signUp
+                ? (
+                  <Stack sx={{ alignItems: 'center' }} gap={0.3}>
+                    {
+                      passDoNotMatch
+                      && <Typography color='error' variant='body2'>Passwords do not match</Typography>
+                    }
+                    <Typography variant='caption' color='primary'>Already have an account?</Typography>
+                    <ButtonBase onClick={() => setSignUp(!signUp)}>
+                      <Typography variant='caption' color='primary'>Login</Typography>
+                    </ButtonBase>
+                  </Stack>
+                )
+                : (
+                  <Stack sx={signOptionsStyles}>
+                    <Typography variant='caption' color='primary'>Forgot password?</Typography>
+                    <Typography variant='caption' color='primary'>Or</Typography>
+                    <ButtonBase onClick={() => setSignUp(!signUp)} >
+                      <Typography variant='caption' color='primary'>Sign up</Typography>
+                    </ButtonBase>
+                  </Stack>
+                )
+            }
           </Stack>
-          <ButtonBase type='submit' sx={submitButtonStyles}>{title}</ButtonBase>
+          <ButtonBase
+            type='submit'
+            disabled={loading}
+            sx={submitButtonStyles}
+            onClick={handleSubmit}
+          >{
+              signUp
+                ? 'Sign up'
+                : 'Login'
+            }</ButtonBase>
         </Box>
-      </Paper>
-    </Box>
+      </Paper >
+    </Box >
   )
 };
 
