@@ -2,7 +2,7 @@ import { Box, CardMedia } from '@mui/material';
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { UserForm } from '../components/UserForm';
-import { setIsAuth } from '../slices/basicSlice';
+import { setIsAuth, activateAuth } from '../slices/basicSlice';
 import { useRegisterMutation } from '../hooks/useRegisterMutation';
 import { useLoginMutation } from '../hooks/useLoginMutation';
 
@@ -37,8 +37,9 @@ const NotRegisteredUser = () => {
     const variable = { input };
     register({
       variables: variable
-    }).then(() => {
-      dispatch(setIsAuth(true));
+    }).then(({ data }) => {
+      const { signup } = data;
+      dispatch(activateAuth(signup));
     });
   };
 
@@ -47,8 +48,9 @@ const NotRegisteredUser = () => {
     const variable = { input };
     login({
       variables: variable
-    }).then(() => {
-      dispatch(setIsAuth(true));
+    }).then(({ data }) => {
+      const { login } = data;
+      dispatch(activateAuth(login));
     });
   };
 

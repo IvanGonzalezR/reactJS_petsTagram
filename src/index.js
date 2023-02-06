@@ -2,14 +2,47 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { store } from './store'
 import { Provider } from 'react-redux'
+import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink, ApolloLink } from "@apollo/client";
+import { setContext } from '@apollo/client/link/context';
+import { onError } from "@apollo/client/link/error";
+
+// por si el link de abajo deja de funcar, usar este >
+// https://petgram-server-anthony-3vrjckvsb.vercel.app/graphql
+
+const authMiddleWare = new ApolloLink((operation, forward) => {
+  const token = sessionStorage.getItem('token');
+  if (token) {
+    operation.setContext({
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    });
+  }
+  return forward(operation)
+});
+
+const errorMiddleware = onError(({ networkError }) => {
+  if (networkError && networkError.result.code === 'invalid_token') {
+    sessionStorage.removeItem('token');
+    window.location = '/user';
+  }
+});
 
 const client = new ApolloClient({
-  uri: 'https://petgram-server-24iykciv5.now.sh/graphql',
+  link: ApolloLink.from(
+    [
+      errorMiddleware,
+      authMiddleWare,
+      new createHttpLink({
+        uri: 'https://petgram-server-24iykciv5.now.sh/graphql'
+      }),
+    ]
+  ),
   cache: new InMemoryCache()
 });
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
