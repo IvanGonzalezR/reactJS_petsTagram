@@ -25,7 +25,7 @@ const authMiddleWare = new ApolloLink((operation, forward) => {
 
 function useNavigates() {
   const navigate = useNavigate();
-  navigate('/user');
+  navigate('/favorites');
 }
 const errorMiddleware = onError(({ networkError }) => {
   if (networkError && networkError.result.code === 'invalid_token') {
