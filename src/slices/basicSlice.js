@@ -22,12 +22,17 @@ const basicSlice = createSlice({
       sessionStorage.setItem('token', action.payload);
       state.isAuth = verifyToken();
     },
+    removeAuth: (state, action) => {
+      sessionStorage.removeItem('token');
+      state.isAuth = false;
+    }
   },
 });
 
 export const {
   setIsAuth,
   activateAuth,
+  removeAuth
 } = basicSlice.actions;
 
 export default basicSlice.reducer;

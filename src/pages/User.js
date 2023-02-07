@@ -1,21 +1,39 @@
+import { Button } from '@mui/material';
+import { Box } from '@mui/system';
 import React from 'react'
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
-import { setIsAuth } from '../slices/basicSlice'
-
+import { useDispatch } from 'react-redux';
+import { removeAuth } from '../slices/basicSlice'
 
 const User = () => {
-  // Obteniendo el valor del store
-  const value = useSelector((state) => state.isAuth, shallowEqual);
   const dispatch = useDispatch();
 
+  const boxStyles = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '100vh',
+    '& button': {
+      width: '60%',
+      height: '7%',
+      borderRadius: '12px',
+    },
+  }
+
   const handleOnclick = () => {
-    // Haciendo dispatch de la acción
-    dispatch(setIsAuth(!value));
+    dispatch(removeAuth());
   }
   return (
     <>
-      <div>valor: {value.toString()}</div>
-      <button onClick={handleOnclick}>Change isAuth</button>
+      <Box sx={boxStyles}>
+        <Button
+          variant='contained'
+          color='error'
+          onClick={handleOnclick}
+        >
+          Sign out
+        </Button>
+      </Box>
     </>
   )
 }

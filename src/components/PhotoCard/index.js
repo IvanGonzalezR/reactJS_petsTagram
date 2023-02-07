@@ -14,11 +14,16 @@ import { Link } from 'react-router-dom';
 
 const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60';
 
-const PhotoCard = ({ id, likes = 0, liked, src = DEFAULT_IMAGE }) => {
+const PhotoCard = ({ id, likes = 0, liked, src = DEFAULT_IMAGE, isFavorites }) => {
   // const key = `like-${id}`;
   // const [ liked, setLiked ] = useLocalStorage(key, false);
   const [ show, ref ] = useNearScreen();
-  const { mutation } = useMutationToggleLike();
+  const { mutation, mutationError } = useMutationToggleLike();
+
+  if (mutationError) {
+    sessionStorage.removeItem('token');
+    window.location = '/user';
+  }
 
   const handleFavClick = () => {
     mutation({
@@ -42,11 +47,17 @@ const PhotoCard = ({ id, likes = 0, liked, src = DEFAULT_IMAGE }) => {
                 <img src={src} />
               </Container>
             </Link>
-            <FavButton
-              likes={likes}
-              liked={liked}
-              onClick={handleFavClick}
-            />
+            {
+              isFavorites
+                ?
+                null
+                :
+                <FavButton
+                  likes={likes}
+                  liked={liked}
+                  onClick={handleFavClick}
+                />
+            }
           </>
         )
       }
