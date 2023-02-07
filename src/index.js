@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { store } from './store'
+import { redirect } from "react-router-dom";
 import { Provider } from 'react-redux'
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink, ApolloLink } from "@apollo/client";
-import { setContext } from '@apollo/client/link/context';
 import { onError } from "@apollo/client/link/error";
 
 // por si el link de abajo deja de funcar, usar este >
@@ -27,6 +27,7 @@ const errorMiddleware = onError(({ networkError }) => {
   if (networkError && networkError.result.code === 'invalid_token') {
     sessionStorage.removeItem('token');
     window.location = '/user';
+    //redireccionar a la pagina de login
   }
 });
 
