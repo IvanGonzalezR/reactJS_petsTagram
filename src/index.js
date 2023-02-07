@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { store } from './store'
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Provider } from 'react-redux'
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink, ApolloLink } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
@@ -23,10 +23,14 @@ const authMiddleWare = new ApolloLink((operation, forward) => {
   return forward(operation)
 });
 
+function useNavigates() {
+  const navigate = useNavigate();
+  navigate('/user');
+}
 const errorMiddleware = onError(({ networkError }) => {
   if (networkError && networkError.result.code === 'invalid_token') {
     sessionStorage.removeItem('token');
-    window.location = '/user';
+    useNavigates();
     //redireccionar a la pagina de login
   }
 });
