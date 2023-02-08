@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifestPlugin = require('webpack-pwa-manifest');
 const path = require('path');
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -32,6 +33,24 @@ module.exports = {
           sizes: [ 96, 128, 192, 256, 384, 512 ],
           destination: './assets/icons',
           ios: true,
+        },
+      ]
+    }),
+    new WorkboxWebpackPlugin.GenerateSW({
+      runtimeCaching: [
+        {
+          urlPattern: new RegExp('https://(res.cloudinary.com|images.unsplash.com|petgram-server-24iykciv5.now.sh)'),
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'images',
+          },
+        },
+        {
+          urlPattern: new RegExp('https://petgram-server-24iykciv5.now.sh'),
+          handler: 'NetworkFirst',
+          options: {
+            cacheName: 'api',
+          },
         },
       ]
     }),
