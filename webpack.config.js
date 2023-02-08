@@ -26,6 +26,7 @@ module.exports = {
       scope: '/',
       background_color: '#fff',
       theme_color: '#b1a',
+      prefer_related_applications: false,
       icons: [
         {
           src: path.resolve('src/img/petgram.png'),
