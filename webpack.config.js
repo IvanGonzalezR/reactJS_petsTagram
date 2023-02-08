@@ -16,7 +16,6 @@ module.exports = {
       template: './public/index.html',
     }),
     new WebpackPwaManifestPlugin({
-      filename: 'manifest.kikefest',
       name: 'Petgram - pictures for pets',
       short_name: 'Petgram 🐶',
       description: 'Con Petgram puedes encontrar fotos de animales domésticos muy bonitos',

@@ -38,5 +38,6 @@
   "start_url": ".",
   "description": "Con Petgram puedes encontrar fotos de animales domésticos muy bonitos",
   "background_color": "#fff",
-  "theme_color": "#b1a"
+  "theme_color": "#b1a",
+  "prefer_related_applications": false
 }
