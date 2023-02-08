@@ -6,6 +6,7 @@ import {
   stackStyle,
   buttonStyle,
 } from '../../styles/PhotoCardStyles';
+import PropTypes from 'prop-types'
 
 const FavButton = ({ liked, likes, onClick }) => {
 
@@ -40,5 +41,11 @@ const FavButton = ({ liked, likes, onClick }) => {
     </Stack>
   );
 };
+
+FavButton.propTypes = {
+  liked: PropTypes.bool.isRequired,
+  likes: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+}
 
 export { FavButton };

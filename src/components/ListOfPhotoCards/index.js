@@ -11,7 +11,7 @@ const listStyle = {
   },
 };
 
-const ListOfPhotoCards = ({ categoryId }) => {
+const ListOfPhotoCardsMemo = ({ categoryId }) => {
   const { loading, data, error } = ListOfPhotoCardsComponent(categoryId);
 
   const array = [ 1, 2, 3, 4, 5, 6, 7, 8 ];
@@ -49,4 +49,8 @@ const ListOfPhotoCards = ({ categoryId }) => {
   )
 };
 
-export { ListOfPhotoCards };
+export const ListOfPhotoCards = React.memo(
+  ListOfPhotoCardsMemo, (prevProps, props) => {
+    return prevProps.categoryId === props.categoryId
+  }
+)

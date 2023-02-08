@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, startTransition, Suspense } from 'react';
 import { Logo } from './components/Logo';
 import { HomePage } from './pages/HomePage';
 import { ThemeProvider } from '@mui/material';
@@ -11,11 +11,13 @@ import { Favs } from './pages/Favs';
 import { NotRegisteredUser } from './pages/NotRegisteredUser';
 import { shallowEqual, useSelector } from 'react-redux';
 
-
+// const Favs = React.lazy(() => import('./pages/Favs').then(
+//   module => ({ default: module.Favs })
+// ));
 
 function App() {
-  const isAuth = useSelector((state) => state.isAuth, shallowEqual);
 
+  const isAuth = useSelector((state) => state.isAuth, shallowEqual);
   return (
     <>
       <ThemeProvider theme={theme}>

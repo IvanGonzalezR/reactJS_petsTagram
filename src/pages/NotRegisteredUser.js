@@ -2,9 +2,10 @@ import { Box, CardMedia } from '@mui/material';
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { UserForm } from '../components/UserForm';
-import { setIsAuth, activateAuth } from '../slices/basicSlice';
+import { activateAuth } from '../slices/basicSlice';
 import { useRegisterMutation } from '../hooks/useRegisterMutation';
 import { useLoginMutation } from '../hooks/useLoginMutation';
+import { Layout } from '../components/Layout';
 
 
 const NotRegisteredUser = () => {
@@ -55,7 +56,7 @@ const NotRegisteredUser = () => {
   };
 
   return (
-    <>
+    <Layout title='Login'>
       <Box sx={boxStyles}>
         <CardMedia
           component='img'
@@ -73,7 +74,7 @@ const NotRegisteredUser = () => {
         signUp={signUp}
         setSignUp={setSignUp}
       />
-    </>
+    </Layout>
   )
 }
 

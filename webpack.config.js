@@ -1,4 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WebpackPwaManifestPlugin = require('webpack-pwa-manifest');
+const path = require('path');
 
 module.exports = {
   entry: './src/index.js',
@@ -12,6 +14,21 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
+    }),
+
+    new WebpackPwaManifestPlugin({
+      name: 'Petgram - pictures for pets',
+      short_name: 'Petgram 🐶',
+      description: 'Con Petgram puedes encontrar fotos de animales domésticos muy bonitos',
+      background_color: '#fff',
+      theme_color: '#b1a',
+      icons: [
+        {
+          src: path.resolve('src/img/petgram.png'),
+          sizes: [ 96, 128, 192, 256, 384, 512 ],
+          destination: './assets/icons',
+        },
+      ]
     }),
   ],
   module: {

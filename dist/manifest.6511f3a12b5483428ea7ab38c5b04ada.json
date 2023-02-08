@@ -1,0 +1,42 @@
+{
+  "icons": [
+    {
+      "src": "/./assets/icons/icon_512x512.122cae097a7caa07ddb351c968d4ed6f.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/./assets/icons/icon_384x384.1add196c09c3cc8f212b57c524b3a179.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/./assets/icons/icon_256x256.55dabd97b0ca819dd8c6e20af26653e6.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/./assets/icons/icon_192x192.6973f8954f8aff8d6465e927293d68f9.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/./assets/icons/icon_128x128.25afc7fa249875839e29add78b3f1ffb.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/./assets/icons/icon_96x96.5e3e975d7fd23ced8de97ca80226febb.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ],
+  "name": "Petgram - pictures for pets",
+  "short_name": "Petgram 🐶",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": ".",
+  "description": "Con Petgram puedes encontrar fotos de animales domésticos muy bonitos",
+  "background_color": "#fff",
+  "theme_color": "#b1a"
+}
